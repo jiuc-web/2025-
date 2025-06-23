@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<form action="/submit" method="post">
+    <div>
+        <label for="头像">头像</label>
+        <input type="file" id="avatar">
+    </div>
+    
+    <div>
+    <label for="nickname">昵称</label>
+    <input type="text" id="nickname">
+    </div>
+
+    <div>
+    <label for="education">学历</label>
+    <select id="education">
+        <option value="college">大专</option>
+        <option value="bachelor">本科</option>
+    </select>
+    </div>
+
+    <div>
+    <label for="gender">性别</label>
+    <input type="radio" id="male" name="gender" value="male">
+    <label for="male">男</label>
+    <input type="radio" id="female" name="gender" value="female">
+    <label for="female">女</label>        
+    </div>
+
+    <div>
+    <label for="hobby">爱好</label>
+    <input type="checkbox" id="moive" name="hobby" value="moive">
+    <label for="moive">电影</label>
+    <input type="checkbox" id="photography" name="hobby" value="photography">
+    <label for="photography">摄影</label>
+    <input type="checkbox" id="music" name="hobby" value="music">
+    <label for="music">音乐</label>
+    <input type="checkbox" id="reading" name="hobby" value="reading">
+    <label for="reading">阅读</label>        
+    </div>
+
+    <div>
+    <label for="signature">签名</label>
+    <textarea id="signature"></textarea>        
+    </div>
+
+    <div>
+    <button type="save">保存</button>        
+    </div>
+</form>
