@@ -1,0 +1,65 @@
+<style>
+    #page {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    #header{
+        flex: 0;
+    }
+
+    #header{
+        background: rgb(236, 233, 233);
+    }
+
+    #footer{
+        margin-top: auto;
+        background: yellow;
+    }
+
+    .main-content{
+        display: flex;
+        flex: 1;
+        align-items: flex-start;/*这样写可以不是等高,stretch是等高的*/
+    }
+
+    #sidebar2{
+        order: 1;
+        width: 200px;
+        background: green;
+        min-height: 200px;
+    }
+
+    #content{
+        order: 2;
+        flex: 1;
+        min-height: 300px;
+        background: palevioletred;
+    }
+
+    #sidebar{
+        order: 3;
+        width: 200px;
+        background: pink;
+        min-height: 200px;
+    }
+</style>
+
+<div id="page">
+    <div id="header"><h1>这里是标题</h1></div>
+    <div class="main-content">
+        <div id="sidebar">
+            <p>侧边栏1</p>
+        </div>
+        <div id="sidebar2">
+            <p>侧边栏2</p>
+        </div>
+        <div id="content">
+            <p>这里是一些文字</p>
+            <p>再来一大段文字</p>
+            <p>地图投影</p>
+        </div>
+    </div>
+    <div id="footer"><p>没人关注的页脚</p></div>
+</div>

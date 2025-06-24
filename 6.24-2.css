@@ -1,0 +1,21 @@
+.pagination {
+  display: flex;
+  justify-content: center; /* 主轴水平居中 */
+  list-style: none;       /* 移除默认列表符号 */
+  padding: 0;
+  margin: 0;
+  gap: 8px;
+}
+
+.pagination li {
+  display: inline-block;  /* 确保横向排列 */
+}
+
+.pagination a {
+  display: inline-block;
+  color: black;
+  text-shadow: 1px 0 0 #101011;
+  padding: 0 10px;
+  border-radius: 2px;
+  box-shadow: 0 1px 0 #5a5b5c inset,0 1px 0 #080808;
+}

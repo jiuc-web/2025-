@@ -1,0 +1,54 @@
+.rectangle {
+    height: 200px;
+    display: flex;
+    background: yellow;
+    position: relative;
+    flex-direction: row;
+    margin-bottom: 30px;
+}
+
+/* 两边自适应，中间定宽 */
+.left2 {
+    flex: 1;
+    background-color: red;
+}
+.middle2 {
+    width: 1490px;
+    background-color: yellow;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+.right2 {
+    flex: 1;
+    background-color: blue;
+}
+
+/* 两边定宽，中间自适应 */
+.left {
+    width: 100px;
+    background-color: red;
+}
+.middle {
+    flex: 1;
+    background-color: yellow;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+.right {
+    width: 100px;
+    background-color: blue;
+}
+
+h1 {
+    color: black;
+    text-align: center;
+}
+
+h2 {
+    color: black;
+    text-align: center;
+}
