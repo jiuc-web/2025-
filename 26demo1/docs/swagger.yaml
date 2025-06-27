@@ -1,0 +1,134 @@
+basePath: /
+definitions:
+  main.Book:
+    properties:
+      author:
+        type: string
+      id:
+        type: string
+      stock:
+        type: string
+      title:
+        type: string
+    type: object
+  main.Response:
+    properties:
+      data: {}
+      message:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: 实现对图书的增删改查的图书管理系统
+  title: 图书管理系统
+  version: "1.0"
+paths:
+  /book/add:
+    post:
+      consumes:
+      - application/json
+      description: 传入书籍信息新增书籍
+      parameters:
+      - description: 书籍信息
+        in: body
+        name: book
+        required: true
+        schema:
+          $ref: '#/definitions/main.Book'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 书籍信息
+          schema:
+            allOf:
+            - $ref: '#/definitions/main.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/main.Book'
+              type: object
+        "400":
+          description: 参数解析失败
+          schema:
+            $ref: '#/definitions/main.Response'
+        "409":
+          description: 书籍ID已存在
+          schema:
+            $ref: '#/definitions/main.Response'
+      summary: 添加书籍
+      tags:
+      - 图书
+  /book/delete/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: 根据书籍 ID 删除书籍
+      parameters:
+      - description: 书籍ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 书籍删除成功
+          schema:
+            $ref: '#/definitions/main.Response'
+      summary: 删除书籍
+      tags:
+      - 图书
+  /book/search:
+    get:
+      description: 获取所有图书信息
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              $ref: '#/definitions/main.Book'
+            type: object
+      summary: 获取所有书籍
+      tags:
+      - 图书
+  /book/update/{id}:
+    put:
+      consumes:
+      - application/json
+      description: 根据 ID 更新书籍信息
+      parameters:
+      - description: 书籍ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: 更新后的书籍信息
+        in: body
+        name: book
+        required: true
+        schema:
+          $ref: '#/definitions/main.Book'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 书籍更新成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/main.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/main.Book'
+              type: object
+        "400":
+          description: 路径ID与请求体ID不一致
+          schema:
+            $ref: '#/definitions/main.Response'
+      summary: 更新书籍
+      tags:
+      - 图书
+swagger: "2.0"

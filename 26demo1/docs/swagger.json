@@ -1,0 +1,213 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "实现对图书的增删改查的图书管理系统",
+        "title": "图书管理系统",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/",
+    "paths": {
+        "/book/add": {
+            "post": {
+                "description": "传入书籍信息新增书籍",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "图书"
+                ],
+                "summary": "添加书籍",
+                "parameters": [
+                    {
+                        "description": "书籍信息",
+                        "name": "book",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/main.Book"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "书籍信息",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/main.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/main.Book"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "参数解析失败",
+                        "schema": {
+                            "$ref": "#/definitions/main.Response"
+                        }
+                    },
+                    "409": {
+                        "description": "书籍ID已存在",
+                        "schema": {
+                            "$ref": "#/definitions/main.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/book/delete/{id}": {
+            "delete": {
+                "description": "根据书籍 ID 删除书籍",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "图书"
+                ],
+                "summary": "删除书籍",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "书籍ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "书籍删除成功",
+                        "schema": {
+                            "$ref": "#/definitions/main.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/book/search": {
+            "get": {
+                "description": "获取所有图书信息",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "图书"
+                ],
+                "summary": "获取所有书籍",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "$ref": "#/definitions/main.Book"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/book/update/{id}": {
+            "put": {
+                "description": "根据 ID 更新书籍信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "图书"
+                ],
+                "summary": "更新书籍",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "书籍ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "更新后的书籍信息",
+                        "name": "book",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/main.Book"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "书籍更新成功",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/main.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/main.Book"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "路径ID与请求体ID不一致",
+                        "schema": {
+                            "$ref": "#/definitions/main.Response"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "main.Book": {
+            "type": "object",
+            "properties": {
+                "author": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "stock": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "main.Response": {
+            "type": "object",
+            "properties": {
+                "data": {},
+                "message": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
