@@ -1,0 +1,53 @@
+/* 基础样式 */
+body.light {
+  background-color: #fff;
+  color: #333;
+}
+
+body.dark {
+  background-color: #333;
+  color: #fff;
+}
+
+.theme-app {
+  text-align: center;
+  min-height: 100vh;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+/* 主题卡片样式 */
+.theme-card {
+  padding: 20px;
+  margin: 20px auto;
+  border-radius: 8px;
+  max-width: 300px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.theme-card.light {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.theme-card.dark {
+  background-color: #444;
+  color: #fff;
+}
+
+/* 按钮样式 */
+.theme-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+
+.theme-button:hover {
+  background-color: #0b7dda;
+}

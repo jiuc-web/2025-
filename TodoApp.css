@@ -1,0 +1,84 @@
+/* 基础样式 */
+.todo-app {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.app-title {
+  text-align: center;
+  color: #333;
+}
+
+/* 表单样式 */
+.todo-form {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.todo-input {
+  flex: 1;
+  padding: 8px;
+  margin-right: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.add-button {
+  padding: 8px 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.add-button:hover {
+  background-color: #45a049;
+}
+
+/* 列表样式 */
+.todo-list {
+  list-style: none;
+  padding: 0;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  margin: 8px 0;
+  padding: 8px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+}
+
+.todo-checkbox {
+  margin-right: 10px;
+}
+
+.todo-text {
+  flex: 1;
+}
+
+.todo-text.completed {
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+.delete-button {
+  padding: 4px 8px;
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.delete-button:hover {
+  background-color: #cc0000;
+}
