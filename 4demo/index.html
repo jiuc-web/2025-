@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <title>图书管理系统</title>
+  <style>
+    body { font-family: Arial; margin: 40px; }
+    input, button { margin: 4px; }
+    .hidden { display: none; }
+    .book-row { margin-bottom: 8px; }
+  </style>
+</head>
+<body>
+  <h2>用户注册</h2>
+  <input id="reg-username" placeholder="用户名">
+  <input id="reg-password" type="password" placeholder="密码">
+  <button onclick="register()">注册</button>
+  <div id="reg-msg"></div>
+
+  <h2>用户登录</h2>
+  <input id="login-username" placeholder="用户名">
+  <input id="login-password" type="password" placeholder="密码">
+  <button onclick="login()">登录</button>
+  <div id="login-msg"></div>
+
+  <div id="main" class="hidden">
+    <h2>图书管理</h2>
+    <div>
+      <input id="book-id" placeholder="ID">
+      <input id="book-title" placeholder="书名">
+      <input id="book-author" placeholder="作者">
+      <input id="book-stock" placeholder="库存">
+      <button onclick="addBook()">添加图书</button>
+    </div>
+    <div id="add-msg"></div>
+    <h3>图书列表</h3>
+    <div id="books"></div>
+  </div>
+
+<script>
+let token = '';
+
+function register() {
+  fetch('http://localhost:8080/register', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      username: document.getElementById('reg-username').value,
+      password: document.getElementById('reg-password').value
+    })
+  }).then(r=>r.json()).then(d=>{
+    document.getElementById('reg-msg').innerText = d.message || d.error || JSON.stringify(d);
+  });
+}
+
+function login() {
+  fetch('http://localhost:8080/login', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      username: document.getElementById('login-username').value,
+      password: document.getElementById('login-password').value
+    })
+  }).then(r=>r.json()).then(d=>{
+    if(d.token){
+      token = d.token;
+      document.getElementById('main').classList.remove('hidden');
+      document.getElementById('login-msg').innerText = "登录成功";
+      loadBooks();
+    }else{
+      document.getElementById('login-msg').innerText = d.message || d.error || JSON.stringify(d);
+    }
+  });
+}
+
+function loadBooks() {
+  fetch('http://localhost:8080/books', {
+    headers: {'Authorization': token}
+  }).then(r=>r.json()).then(d=>{
+    let html = '';
+    (d.books||[]).forEach(book=>{
+      html += `<div class="book-row">
+        <b>${book.title}</b> by ${book.author} (ID:${book.id}, 库存:${book.stock})
+        <button onclick="delBook('${book.id}')">删除</button>
+        <button onclick="editBook('${book.id}')">编辑</button>
+      </div>`;
+    });
+    document.getElementById('books').innerHTML = html;
+  });
+}
+
+function addBook() {
+  fetch('http://localhost:8080/books', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json', 'Authorization': token},
+    body: JSON.stringify({
+      id: document.getElementById('book-id').value,
+      title: document.getElementById('book-title').value,
+      author: document.getElementById('book-author').value,
+      stock: document.getElementById('book-stock').value
+    })
+  }).then(r=>r.json()).then(d=>{
+    document.getElementById('add-msg').innerText = d.message || d.error || JSON.stringify(d);
+    loadBooks();
+  });
+}
+
+function delBook(id) {
+  fetch('/books/' + id, {
+    method: 'DELETE',
+    headers: {'Authorization': token}
+  }).then(r=>r.json()).then(d=>{
+    loadBooks();
+  });
+}
+
+function editBook(id) {
+  let title = prompt('新书名？');
+  let author = prompt('新作者？');
+  let stock = prompt('新库存？');
+  fetch('/books/' + id, {
+    method: 'PUT',
+    headers: {'Content-Type': 'application/json', 'Authorization': token},
+    body: JSON.stringify({title, author, stock})
+  }).then(r=>r.json()).then(d=>{
+    loadBooks();
+  });
+}
+</script>
+</body>
+</html>
